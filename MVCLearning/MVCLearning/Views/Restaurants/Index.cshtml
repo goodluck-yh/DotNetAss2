@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MVCLearning.Models.Restaurant>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @*下面这个跳转到ReviewController中去，必须有个null，只有这个方法可以
+                在跳转到其他controller的时候，它传递了一个id值，我觉得可能是为了省下网络流量
+              有必要说一下一对多的时候，如何对对增删改查
+                传递本体ID到另一个controller
+                在另一个controller中，获得该本体，并传入view中
+                view中将本体中一对多元素传递到partial page中
+                在该页面中增删改查即可！
+            *@
+            @Html.ActionLink("Reviews", "Index", "ReviewNew", new { id = item.Id }, null) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

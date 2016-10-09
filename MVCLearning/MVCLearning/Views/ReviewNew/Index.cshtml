@@ -1,0 +1,19 @@
+﻿@model MVCLearning.Models.Restaurant
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@*下面这行，@Model.Review 和 Model.Review 是一样的
+    了解如何引入partial page
+    有一点需要知道的是，partial page可以有自己的Model
+*@
+@Html.Partial("_ListReview", @Model.Reviews);
+
+<p>
+    @Html.ActionLink("Create New", "Create", new {restaurantId = Model.Id})
+</p>
+
